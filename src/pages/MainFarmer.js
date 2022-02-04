@@ -1,9 +1,10 @@
 import React from "react";
+import { CafeList } from "../components";
 
 const MainFarmer = () => {
     return (
         <div>
-            MainFarmer
+            <CafeList />
         </div>
     );
 };

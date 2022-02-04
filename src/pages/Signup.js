@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../App";
+import { SignupFormCafe, SignupFormFarmer } from "../components";
 
 const Signup = () => {
+    const authContext = useContext(AuthContext);
+
     return (
         <div>
-            Signup
+            <h2>SIGN UP</h2>
+            {authContext.state.cf === 'c' ? (
+                <div>
+                    <SignupFormCafe />
+                </div>
+            ) : (
+                <div>
+                    <SignupFormFarmer />
+                </div>
+            )}
         </div>
     );
 };
