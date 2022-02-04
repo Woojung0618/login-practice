@@ -8,7 +8,7 @@ const Signup = () => {
     return (
         <div>
             <h2>SIGN UP</h2>
-            {authContext.state.cf === 'c' ? (
+            {authContext.state.userType === 'c' ? (
                 <div>
                     <SignupFormCafe />
                 </div>

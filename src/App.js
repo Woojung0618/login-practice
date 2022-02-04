@@ -36,7 +36,7 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          {authContext.state.cf ? (
+          {authContext.state.userType ? (
           <div>
             <Link to="/maincafe">Main</Link>
             <Link to="/mypagecafe">Cafe Owner</Link>
@@ -58,14 +58,14 @@ export const AuthContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // uid : userid. token이랑 같이 백에 넘기기. 
-    // cf : cafe or farmer 구분. 'c', 'f'
+    // userName : userid. token이랑 같이 백에 넘기기. 
+    // userType : cafe or farmer 구분. 'c', 'f'
       case "CafeLogin":
-          return { token: action.token, uid: action.uid, cf: action.cf };
+          return { token: action.token, userName: action.userName, userType: action.userType };
       case "FarmerLogin":
-          return { token: action.token, uid: action.uid, cf: action.cf };
+          return { token: action.token, userName: action.userName, userType: action.userType };
       case "logout":
-          return { token: null, uid: null, cf: null };
+          return { token: null, userName: null, userType: null };
       default:
           return state;
   }
@@ -74,8 +74,8 @@ const reducer = (state, action) => {
 function App() {
   const [state, dispatch] = useReducer(reducer, {
     token: null,
-    uid: null,
-    cf: 'c',
+    userName: null,
+    userType: 'c',
   });
 
   return (

@@ -5,8 +5,8 @@ import { postApi } from "../api";
 
 const LoginForm = ({ history }) => {
     const [details, setDetails] = useState({
-        cf: "",
-        uid: "", 
+        userType: "",
+        userName: "", 
         password: "",
     }); // useState 정보 : id, password
     const [loginErrorMsg, setLoginErrorMsg] = useState("");
@@ -15,12 +15,12 @@ const LoginForm = ({ history }) => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        await postApi(details, "/api/login/")
+        await postApi(details, "/login")
             .then(({ status, data }) => {
                 authContext.dispatch({
                     type: "login",
                     token: data.token,
-                    uid: details.uid,
+                    userName: details.userName,
                 }); // useContext 처리
                 
                 history.push("/"); // 성공 시 home으로 이동
@@ -40,12 +40,12 @@ const LoginForm = ({ history }) => {
                 <h5>ID</h5>
                 <input
                     type="text"
-                    name="uid"
+                    name="userName"
                     placeholder=""
                     onChange={
-                        (e) => setDetails({ ...details, uid: e.target.value })
+                        (e) => setDetails({ ...details, userName: e.target.value })
                     }
-                    value={details.uid}
+                    value={details.userName}
                 />
             </div>
             <div className="form-group">

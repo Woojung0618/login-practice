@@ -4,8 +4,7 @@ import { AuthContext } from "../App";
 
 const SignupFormCafe = ({ history }) => {
     const [details, setDetails] = useState({
-        name: "",
-        uid: "",
+        userName: "",
         password: "",
         phone: "",
         farm: "",
@@ -15,12 +14,12 @@ const SignupFormCafe = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await postApi(details, "/api/signup/")
+        await postApi(details, "/api/user/register")
             .then(({ status, data }) => {
                 AuthContext.dispatch({
                     type: "CafeLogin",
                     token: data.token,
-                    uid: details.uid,
+                    userName: details.userName,
                     cf: 'c',
                 });
                 
@@ -33,28 +32,17 @@ const SignupFormCafe = ({ history }) => {
     }
     return (
         <form className="Signup-outer-form" onSubmit={submitHandler}>
-            <div className="form-group">
-                <h5>NAME</h5>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder=""
-                    onChange={(e) =>
-                        setDetails({ ...details, uid: e.target.value })
-                    }
-                    value={details.uid}
-                />
-            </div>
+            
             <div className="form-group">
                 <h5>ID</h5>
                 <input
                     type="text"
-                    name="uid"
+                    name="userName"
                     placeholder=""
                     onChange={(e) =>
-                        setDetails({ ...details, uid: e.target.value })
+                        setDetails({ ...details, userName: e.target.value })
                     }
-                    value={details.uid}
+                    value={details.userName}
                 />
             </div>
             <div className="form-group">

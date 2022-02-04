@@ -5,7 +5,7 @@ import { AuthContext } from "../App";
 const SignupFormFarmer = ({ history }) => {
     const [details, setDetails] = useState({
         name: "",
-        uid: "",
+        userName: "",
         password: "",
         phone: "",
         cafe: "",
@@ -14,13 +14,13 @@ const SignupFormFarmer = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await postApi(details, "/api/signup/")
+        await postApi(details, "/api/user/register")
             .then(({ status, data }) => {
                 AuthContext.dispatch({
                     type: "FarmerLogin",
                     token: data.token,
-                    uid: details.uid,
-                    cf: 'f',
+                    userName: details.userName,
+                    userType: 'f',
                 });
                 
                 history.pushState("/login"); // 성공 시 login 으로 이동
@@ -39,21 +39,21 @@ const SignupFormFarmer = ({ history }) => {
                     name="name"
                     placeholder=""
                     onChange={(e) =>
-                        setDetails({ ...details, uid: e.target.value })
+                        setDetails({ ...details, userName: e.target.value })
                     }
-                    value={details.uid}
+                    value={details.userName}
                 />
             </div>
             <div className="form-group">
                 <h5>ID</h5>
                 <input
                     type="text"
-                    name="uid"
+                    name="userName"
                     placeholder=""
                     onChange={(e) =>
-                        setDetails({ ...details, uid: e.target.value })
+                        setDetails({ ...details, userName: e.target.value })
                     }
-                    value={details.uid}
+                    value={details.userName}
                 />
             </div>
             <div className="form-group">
